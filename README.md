@@ -214,14 +214,14 @@ Como possíveis evoluções do projeto, poderiam ser incorporadas etapas de mode
 
 ## Como executar
 
-1. Acesse o notebook `MVP - Pipeline Framingham.ipynb` disponível neste repositório.
-2. Importe o notebook para um ambiente Databricks.
-3. Disponibilize o conjunto de dados utilizado no ambiente do Databricks.
-4. Ajuste o caminho de leitura do arquivo, caso necessário.
-5. Execute as células do notebook em sequência.
+1. Importe o notebook `MVP - Pipeline Framingham.ipynb` para um ambiente Databricks.
+2. Disponibilize o conjunto de dados Framingham em um Volume do Unity Catalog.
+3. Ajuste, se necessário, o caminho de leitura definido no início do notebook para apontar para o local em que o arquivo foi armazenado.
+4. Execute as células do notebook em sequência.
 
-O notebook realiza a ingestão dos dados, construção e persistência das camadas Bronze, Silver e Gold, verificações de qualidade e análises das perguntas de negócio.
+Durante a execução, o notebook realiza a ingestão dos dados, a construção e persistência das camadas Bronze, Silver e Gold, as verificações de qualidade e as análises das perguntas de negócio.
 
+Os nomes de catálogo, schema e caminhos utilizados no projeto estão definidos no próprio notebook e podem ser adaptados de acordo com o ambiente Databricks utilizado.
 ---
 
 ## Autor
