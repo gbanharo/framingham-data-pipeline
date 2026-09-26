@@ -18,11 +18,7 @@ As perguntas de negócio utilizadas para orientar a análise estão apresentadas
 - a relação entre tabagismo e ocorrência de doença coronariana;
 - a ocorrência de doença coronariana entre pacientes com e sem diabetes.
 
-A exploração inicial dos dados e de sua estrutura está documentada nas **Seções 2 e 3 do notebook**, incluindo a visualização inicial do conjunto na **Seção 3.1**.
-
-### Evidência da exploração dos dados
-
-<img width="831" height="290" alt="image" src="https://github.com/user-attachments/assets/4bf0f509-7374-40d0-b6fc-456957a61cfb" />
+A exploração inicial dos dados e de sua estrutura está documentada nas **Seções 2 e 3 do notebook**.
 
 
 ---
@@ -33,64 +29,84 @@ A ingestão dos dados foi realizada no Databricks utilizando PySpark. O dataset 
 
 A etapa de carregamento e inspeção inicial está documentada na **Seção 3.1 do notebook**.
 
-![Carga dos dados no Databricks](images/02_carga_dados.png)
+### Evidência da carga e visualização inicial dos dados
+
+
+<img width="831" height="290" alt="image" src="https://github.com/user-attachments/assets/4bf0f509-7374-40d0-b6fc-456957a61cfb" />
+
 
 ---
 
 ## 3. Modelagem e Catálogo de Dados
 
-O pipeline foi estruturado seguindo a arquitetura Medallion, dividida em três camadas:
+O pipeline foi estruturado seguindo a arquitetura em camadas **Bronze, Silver e Gold**, permitindo separar as diferentes etapas de processamento dos dados.
 
-- **Bronze:** armazenamento dos dados provenientes da fonte;
-- **Silver:** dados tratados, padronizados e validados;
-- **Gold:** conjunto final preparado para consumo analítico e modelagem.
+A organização adotada é composta por:
 
-As tabelas foram persistidas utilizando Delta e registradas no Unity Catalog do Databricks.
+- **Bronze:** camada responsável por preservar os dados provenientes da ingestão inicial, mantendo uma representação próxima à fonte original;
+- **Silver:** camada destinada ao tratamento, padronização e validação dos dados;
+- **Gold:** camada que disponibiliza o conjunto final preparado para consumo analítico, resposta às perguntas de negócio e etapas posteriores de modelagem.
 
-A construção e validação da camada Silver estão documentadas na **Seção 4**, enquanto a construção e validação da camada Gold estão apresentadas na **Seção 5**.
+No Databricks, as três camadas foram persistidas como tabelas Delta e registradas no **Unity Catalog**, dentro do catálogo `workspace` e do schema `framingham_mvp`, com os nomes:
 
-### Camada Silver
+- `bronze_framingham`
+- `silver_framingham`
+- `gold_framingham`
 
-A estrutura final da camada Silver pode ser visualizada na **Seção 4.5 do notebook**.
+A construção da camada Bronze está documentada na **Seção 3 do notebook**, a transformação e validação da camada Silver na **Seção 4** e a preparação e persistência da camada Gold na **Seção 5**.
 
-![Camada Silver](images/03_camada_silver.png)
+### Evidência do catálogo de dados no Unity Catalog
 
-### Camada Gold
+<img width="520" height="328" alt="image" src="https://github.com/user-attachments/assets/498600d5-2e3c-4a96-8e4a-b7ab9793a596" />
 
-A estrutura final da camada Gold pode ser visualizada na **Seção 5.9 do notebook**.
-
-![Camada Gold](images/04_camada_gold.png)
+A visualização do Unity Catalog confirma a existência das três tabelas que compõem o pipeline, correspondentes às camadas Bronze, Silver e Gold.
 
 ---
 
 ## 4. Pipeline de Dados
 
-O pipeline realiza a transformação progressiva dos dados entre as camadas Bronze, Silver e Gold.
+O processo de ETL foi desenvolvido integralmente no Databricks utilizando PySpark e organizado em um único notebook, seguindo de forma sequencial a construção das camadas Bronze, Silver e Gold.
 
-Durante a construção da camada Silver foram realizados os tratamentos necessários para padronização e preparação dos dados. Posteriormente, a camada Gold foi construída a partir dos dados tratados e disponibilizada para as análises finais.
+A **Seção 3 do notebook** realiza a ingestão e a persistência dos dados na camada Bronze. A **Seção 4** utiliza a Bronze como origem, aplica os tratamentos e validações necessários e persiste o resultado na camada Silver. Em seguida, a **Seção 5** utiliza os dados tratados da Silver para preparar e persistir a camada Gold, utilizada nas análises finais.
 
-A implementação do pipeline está documentada principalmente nas **Seções 4 e 5 do notebook**.
+Após a persistência, as tabelas Silver e Gold foram novamente carregadas a partir do Unity Catalog para validação, confirmando que o processo de gravação foi realizado corretamente.
 
-A persistência e validação da camada Silver são apresentadas nas **Seções 4.4 e 4.5**, enquanto a persistência e validação da camada Gold são apresentadas nas **Seções 5.7, 5.8 e 5.9**.
+O código completo do pipeline, incluindo as transformações, persistências e validações, está disponível no notebook publicado neste repositório.
 
-![Pipeline Bronze Silver Gold](images/05_pipeline.png)
+### Evidências da execução e persistência do pipeline
+
+A persistência da camada Silver é realizada na **Seção 4.3 do notebook**:
+
+<img width="302" height="185" alt="image" src="https://github.com/user-attachments/assets/44930f5e-a767-492f-97d8-608c49f5ea8b" />
+
+A persistência da camada Gold é realizada na **Seção 5.7 do notebook**:
+
+<img width="334" height="185" alt="image" src="https://github.com/user-attachments/assets/d574e49e-6e45-4c24-a6f4-cfc0bebe88c5" />
+
+Após a gravação, as tabelas Silver e Gold foram novamente carregadas a partir do Unity Catalog e validadas nas etapas posteriores do notebook, verificando a quantidade de registros e atributos, além da presença de registros duplicados e valores ausentes.
 
 ---
 
 ## 5. Qualidade dos Dados
 
-A qualidade dos dados foi avaliada ao longo do pipeline e consolidada na **Seção 6 do notebook**.
+A qualidade dos dados foi verificada ao longo das etapas de construção do pipeline. Após os tratamentos realizados na camada Silver e a preparação da camada Gold, o conjunto final persistido foi submetido a uma nova validação.
 
-Foram verificadas:
+Na **Seção 5.8 do notebook**, a tabela Gold foi carregada novamente a partir do Unity Catalog para verificar se os dados haviam sido armazenados corretamente. Foram conferidos a quantidade de registros e atributos, a presença de registros duplicados e a existência de valores ausentes.
 
-- presença de valores ausentes e registros duplicados (**Seção 6.1**);
-- consistência dos valores e domínios das variáveis (**Seção 6.2**);
-- presença e análise de valores extremos (**Seção 6.3**);
-- síntese final das verificações de qualidade (**Seção 6.4**).
+A validação apresentou os seguintes resultados:
 
-Após os tratamentos realizados, a camada Gold permaneceu com **4.238 registros e 16 atributos**, sem valores ausentes ou registros duplicados.
+- **4.238 registros**;
+- **16 atributos**;
+- **0 registros duplicados**;
+- **0 valores ausentes**.
 
-![Qualidade dos dados](images/06_qualidade_dados.png)
+### Evidência da validação da camada Gold
+
+<img width="363" height="441" alt="image" src="https://github.com/user-attachments/assets/a042ec83-cbb8-4995-b5e7-f90022eea293" />
+
+Posteriormente, a **Seção 6 do notebook** complementa a avaliação da qualidade dos dados por meio da verificação dos valores e domínios das variáveis, análise dos intervalos numéricos e inspeção de valores extremos. Os valores de maior magnitude identificados foram mantidos quando não havia evidências suficientes para classificá-los como erros.
+
+Dessa forma, a validação da camada Gold e as verificações complementares da Seção 6 indicam que o conjunto final apresenta condições adequadas para a realização das análises propostas no projeto.
 
 ---
 
