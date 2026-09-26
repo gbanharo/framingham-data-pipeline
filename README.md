@@ -18,7 +18,7 @@ As perguntas de negócio utilizadas para orientar a análise estão apresentadas
 - a relação entre tabagismo e ocorrência de doença coronariana;
 - a ocorrência de doença coronariana entre pacientes com e sem diabetes.
 
-A exploração inicial dos dados e de sua estrutura está documentada nas **Seções 2 e 3 do notebook**.
+A exploração inicial dos dados e de sua estrutura está documentada na Seção 2 do notebook.
 
 
 ---
@@ -174,7 +174,7 @@ A análise correspondente está apresentada na **Seção 7.5 do notebook**.
 
 <img width="377" height="317" alt="image" src="https://github.com/user-attachments/assets/2a2a3a84-f775-471f-81a3-d0e3f6b6153c" />
 
-As evidências apresentadas demonstram a execução das cinco análises no Databricks e os resultados utilizados para responder às perguntas de negócio propostas. A consolidação das respostas está apresentada na **Seção 7.6 do notebook**.
+A consolidação das respostas às cinco perguntas de negócio está apresentada na **Seção 7.6 do notebook**.
 
 
 ---
@@ -218,9 +218,9 @@ O desenvolvimento completo deste MVP está disponível no notebook `MVP - Pipeli
 
 O notebook reúne os códigos desenvolvidos e executados no Databricks, as explicações em Markdown, a construção das camadas Bronze, Silver e Gold, as verificações de qualidade dos dados, as análises realizadas e os resultados obtidos.
 
-Os sete tópicos previstos na especificação do projeto — **Contexto de Negócio e Perguntas, Carga dos Dados, Modelagem e Catálogo de Dados, Pipeline de Dados, Qualidade de Dados, Análise de Dados e Autoavaliação** — estão documentados ao longo do notebook e também consolidados neste README.
+Os sete tópicos previstos na especificação do projeto, **Contexto de Negócio e Perguntas, Carga dos Dados, Modelagem e Catálogo de Dados, Pipeline de Dados, Qualidade de Dados, Análise de Dados e Autoavaliação**, estão consolidados neste README, com referências às etapas correspondentes desenvolvidas no notebook.
 
-O repositório também pode ser acessado pelo Databricks por meio de um **Git folder**, permitindo a visualização do notebook diretamente na plataforma.
+
 ---
 
 ## Autor
