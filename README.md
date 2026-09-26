@@ -110,38 +110,86 @@ Dessa forma, a validação da camada Gold e as verificações complementares da 
 
 ---
 
-## 6. Análise de Dados
 
-A análise final está apresentada na **Seção 7 do notebook** e responde às cinco perguntas de negócio definidas no início do projeto.
+## 6. Análise de Dados e Respostas às Perguntas de Negócio
 
-As análises estão organizadas da seguinte forma:
+A análise final dos dados está apresentada na **Seção 7 do notebook** e foi realizada a partir dos dados tratados e disponibilizados na camada Gold. O objetivo desta etapa foi responder às **cinco perguntas de negócio definidas no início do projeto**, utilizando as informações disponíveis no conjunto de dados Framingham.
+
+As análises foram organizadas da seguinte forma:
 
 - **Seção 7.1:** ocorrência de doença coronariana por faixa etária;
-- **Seção 7.2:** ocorrência de doença coronariana e hipertensão;
+- **Seção 7.2:** hipertensão e ocorrência de doença coronariana;
 - **Seção 7.3:** indicadores clínicos e ocorrência de doença coronariana;
 - **Seção 7.4:** tabagismo e ocorrência de doença coronariana;
 - **Seção 7.5:** diabetes e ocorrência de doença coronariana;
 - **Seção 7.6:** síntese das respostas às perguntas de negócio.
 
-As cinco perguntas de negócio propostas foram respondidas utilizando os dados tratados e disponibilizados na camada Gold.
+### Principais resultados
 
-### Evidência das análises
+As **cinco perguntas de negócio propostas foram respondidas** a partir das análises realizadas sobre os dados da camada Gold.
 
-![Respostas às perguntas de negócio](images/07_analise_dados.png)
+Em relação à **idade**, a ocorrência de `TenYearCHD = 1` aumentou entre as faixas etárias analisadas, passando de **4,14% entre indivíduos de 30 a 39 anos para 27,68% entre aqueles de 60 a 70 anos**.
+
+Na análise da **hipertensão**, a ocorrência de `TenYearCHD = 1` foi de **10,92% entre indivíduos sem hipertensão** e de **24,70% entre indivíduos com hipertensão**.
+
+Os **indicadores clínicos** também apresentaram diferenças entre os grupos. Os indivíduos com `TenYearCHD = 1` apresentaram, em média, valores mais elevados de colesterol total, pressão arterial sistólica e diastólica, IMC e glicose.
+
+Em relação ao **tabagismo**, a ocorrência de `TenYearCHD = 1` foi de **14,51% entre não fumantes atuais** e de **15,90% entre fumantes atuais**. Além disso, os indivíduos com `TenYearCHD = 1` apresentaram maior média de cigarros consumidos por dia.
+
+Na análise da **diabetes**, **14,63% dos indivíduos sem diabetes** apresentaram `TenYearCHD = 1`, enquanto entre os indivíduos com diabetes esse percentual foi de **36,70%**. Esse resultado deve ser interpretado considerando que o grupo com diabetes possui um número menor de registros no conjunto de dados.
+
+De forma geral, os resultados permitiram identificar diferenças na ocorrência de doença coronariana entre os grupos analisados e **responder às cinco perguntas de negócio definidas para o projeto**. As associações identificadas possuem caráter descritivo e não devem ser interpretadas como relações de causa e efeito.
+
+### Evidências das respostas às perguntas de negócio
+
+A seguir são apresentadas as evidências obtidas no Databricks para cada uma das cinco perguntas de negócio.
+
+#### 6.1 Ocorrência de doença coronariana por faixa etária
+
+A análise correspondente está apresentada na **Seção 7.1 do notebook**.
+
+<img width="347" height="478" alt="image" src="https://github.com/user-attachments/assets/eb7c9920-d3fc-4144-b852-fd30f68d2b18" />
+
+#### 6.2 Hipertensão e ocorrência de doença coronariana
+
+A análise correspondente está apresentada na **Seção 7.2 do notebook**.
+
+<img width="396" height="311" alt="image" src="https://github.com/user-attachments/assets/a480bc7d-e9d3-4760-9df7-b9bbe5b4543c" />
+
+#### 6.3 Indicadores clínicos e ocorrência de doença coronariana
+
+A análise correspondente está apresentada na **Seção 7.3 do notebook**.
+
+<img width="491" height="251" alt="image" src="https://github.com/user-attachments/assets/8dea36de-41da-4aad-bbe8-4ce7f310623b" />
+
+#### 6.4 Tabagismo e ocorrência de doença coronariana
+
+A análise correspondente está apresentada na **Seção 7.4 do notebook**.
+
+<img width="403" height="319" alt="image" src="https://github.com/user-attachments/assets/cad48c96-d299-43bf-919e-0e370bccbee1" />
+
+#### 6.5 Diabetes e ocorrência de doença coronariana
+
+A análise correspondente está apresentada na **Seção 7.5 do notebook**.
+
+<img width="377" height="317" alt="image" src="https://github.com/user-attachments/assets/2a2a3a84-f775-471f-81a3-d0e3f6b6153c" />
+
+As evidências apresentadas demonstram a execução das cinco análises no Databricks e os resultados utilizados para responder às perguntas de negócio propostas. A consolidação das respostas está apresentada na **Seção 7.6 do notebook**.
+
 
 ---
 
 ## 7. Autoavaliação
 
-O projeto atingiu o objetivo de construir um pipeline de dados completo no Databricks, estruturado nas camadas Bronze, Silver e Gold, utilizando PySpark e tabelas Delta.
+O projeto atingiu os objetivos definidos inicialmente, com a construção de um pipeline de dados completo no Databricks, estruturado nas camadas Bronze, Silver e Gold, utilizando PySpark e tabelas Delta.
 
-O desenvolvimento permitiu realizar desde a ingestão dos dados brutos até sua preparação para consumo analítico. Durante o processo foram realizadas verificações de qualidade, persistência das tabelas e análises relacionadas à ocorrência de doença coronariana.
+O desenvolvimento permitiu realizar desde a ingestão dos dados brutos até sua preparação para consumo analítico. Durante o processo, foram realizados tratamentos e verificações de qualidade, persistência das diferentes camadas no Unity Catalog e análises relacionadas à ocorrência de doença coronariana.
 
-As **cinco perguntas de negócio definidas na Seção 1.3 foram respondidas**, permitindo transformar os dados tratados em informações úteis para análise.
+As **cinco perguntas de negócio definidas na Seção 1.3 foram respondidas**, permitindo transformar os dados tratados em informações úteis para análise e concluir os objetivos analíticos estabelecidos para o projeto.
 
-Entre os principais desafios estiveram a organização das etapas do pipeline, o tratamento e validação dos dados e a estruturação das análises de forma rastreável entre as diferentes camadas.
+Entre as principais dificuldades encontradas estiveram a organização das etapas do pipeline, a definição dos tratamentos necessários para os dados, a validação das tabelas após a persistência e a estruturação das análises de forma rastreável entre as diferentes camadas.
 
-Como possíveis evoluções do projeto, poderiam ser incorporadas etapas de modelagem preditiva, avaliação de modelos e automação da execução do pipeline.
+Como possíveis evoluções do projeto, poderiam ser incorporadas etapas de modelagem preditiva para a variável `TenYearCHD`, avaliação e comparação de modelos e automação da execução do pipeline. Essas extensões permitiriam avançar a partir da análise descritiva realizada neste MVP.
 
 ---
 
@@ -161,3 +209,25 @@ Como possíveis evoluções do projeto, poderiam ser incorporadas etapas de mode
 - `MVP - Pipeline Framingham.ipynb` — notebook completo desenvolvido e executado no Databricks;
 - `framingham.csv.xlsx` — conjunto de dados utilizado no projeto;
 - `README.md` — documentação e evidências do projeto.
+
+---
+
+## Como executar
+
+1. Acesse o notebook `MVP - Pipeline Framingham.ipynb` disponível neste repositório.
+2. Importe o notebook para um ambiente Databricks.
+3. Disponibilize o conjunto de dados utilizado no ambiente do Databricks.
+4. Ajuste o caminho de leitura do arquivo, caso necessário.
+5. Execute as células do notebook em sequência.
+
+O notebook realiza a ingestão dos dados, construção e persistência das camadas Bronze, Silver e Gold, verificações de qualidade e análises das perguntas de negócio.
+
+---
+
+## Autor
+
+Guilherme Montenegro Banharo
+
+Pós-Graduação em Ciência de Dados e Analytics
+
+PUC-Rio
